@@ -1,18 +1,20 @@
 import java.util.Date;
 
 public final class TermDepositCertificate extends FinancialProduct implements MaturityCalculable {
+    private CdtNumber cdtNumber;
     private int monthsTerm;
     private double amount;
     private float monthlyInterest;
 
     public TermDepositCertificate(
-            String accountNumber,
-            Date openingDate,
-            int monthsTerm,
-            double amount,
-            float monthlyInterest
+        String accountNumber,
+        Date openingDate,
+        int monthsTerm,
+        double amount,
+        float monthlyInterest
     ) {
-        super(accountNumber, openingDate);
+        super(openingDate);
+        this.cdtNumber = new CdtNumber(accountNumber);
         this.monthsTerm = monthsTerm;
         this.amount = amount;
         this.monthlyInterest = monthlyInterest;
@@ -21,6 +23,14 @@ public final class TermDepositCertificate extends FinancialProduct implements Ma
     @Override
     public double calculateMonthlyInterest() {
         return 0;
+    }
+
+    public String getCdtNumber() {
+        return cdtNumber.getValue();
+    }
+
+    public void setCdtNumber(String cdtNumber) {
+        this.cdtNumber.setValue(cdtNumber);
     }
 
     public int getMonthsTerm() {

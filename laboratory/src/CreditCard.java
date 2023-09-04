@@ -1,24 +1,34 @@
 import java.util.Date;
 
 public class CreditCard extends FinancialProduct implements InterestCalculable {
+    private CardNumber cardNumber;
     private Date expirationDate;
     private float interestOnUsage;
     private double creditLimit;
     private double usedAmount;
 
     public CreditCard(
-            String accountNumber,
-            Date openingDate,
-            Date expirationDate,
-            float interestOnUsage,
-            double creditLimit,
-            double usedAmount
+        String accountNumber,
+        Date openingDate,
+        Date expirationDate,
+        float interestOnUsage,
+        double creditLimit,
+        double usedAmount
     ) {
-        super(accountNumber, openingDate);
+        super(openingDate);
+        this.cardNumber = new CardNumber(accountNumber);
         this.expirationDate = expirationDate;
         this.interestOnUsage = interestOnUsage;
         this.creditLimit = creditLimit;
         this.usedAmount = usedAmount;
+    }
+
+    public String getCardNumber() {
+        return cardNumber.getValue();
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber.setValue(cardNumber);
     }
 
     @Override
