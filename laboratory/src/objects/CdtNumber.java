@@ -1,38 +1,50 @@
 package objects;
 
+import exceptions.FinancialProductNumberException;
+
 import java.util.regex.Pattern;
 
 public class CdtNumber {
-    private static final String REGEX;
     private static final Pattern PATTERN;
 
     static {
-        REGEX = "^[0-9]{10}$";
-        PATTERN = Pattern.compile(REGEX);
+        PATTERN = Pattern.compile("^\\d{10}$");
     }
 
     private String value;
 
     public CdtNumber(String value) {
-        ensureIsValidCdtNumber(value);
         this.value = value;
+
+        ensureValueIsDefined(value);
+        ensureValueIsNumber(value);
+        ensureIsValidCdtNumber(value);
+    }
+
+    public void ensureValueIsDefined(String value) throws IllegalArgumentException {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException("Número de CDT debe ser definido");
+        }
+    }
+
+    public void ensureValueIsNumber(String value ) throws IllegalArgumentException {
+        try {
+            Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Número de CDT debe contener solo números");
+        }
     }
 
     public void ensureIsValidCdtNumber(
         String cdtNumber
     ) throws FinancialProductNumberException {
         if (!PATTERN.matcher(cdtNumber).find()) {
-            throw new FinancialProductNumberException(REGEX);
+            throw new FinancialProductNumberException("##########");
         }
     }
 
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        ensureIsValidCdtNumber(value);
-        this.value = value;
     }
 
     @Override

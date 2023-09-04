@@ -26,7 +26,7 @@ public abstract class AccountProduct extends FinancialProduct implements Interes
     }
 
     public void setAccountNumber(String accountNumber) {
-        this.accountNumber.setValue(accountNumber);
+        this.accountNumber = new AccountNumber(accountNumber);
     }
 
     public double getBalance() {

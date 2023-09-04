@@ -11,14 +11,14 @@ public final class TermDepositCertificate extends FinancialProduct implements Ma
     private float monthlyInterest;
 
     public TermDepositCertificate(
-        String accountNumber,
+        String cdtNumber,
         Date openingDate,
         int monthsTerm,
         double amount,
         float monthlyInterest
     ) {
         super(openingDate);
-        this.cdtNumber = new CdtNumber(accountNumber);
+        this.cdtNumber = new CdtNumber(cdtNumber);
         this.monthsTerm = monthsTerm;
         this.amount = amount;
         this.monthlyInterest = monthlyInterest;
@@ -34,7 +34,7 @@ public final class TermDepositCertificate extends FinancialProduct implements Ma
     }
 
     public void setCdtNumber(String cdtNumber) {
-        this.cdtNumber.setValue(cdtNumber);
+        this.cdtNumber = new CdtNumber(cdtNumber);
     }
 
     public int getMonthsTerm() {

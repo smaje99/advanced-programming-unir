@@ -12,7 +12,7 @@ public class CreditCard extends FinancialProduct implements InterestCalculable {
     private double usedAmount;
 
     public CreditCard(
-        String accountNumber,
+        String cardNumber,
         Date openingDate,
         Date expirationDate,
         float interestOnUsage,
@@ -20,7 +20,7 @@ public class CreditCard extends FinancialProduct implements InterestCalculable {
         double usedAmount
     ) {
         super(openingDate);
-        this.cardNumber = new CardNumber(accountNumber);
+        this.cardNumber = new CardNumber(cardNumber);
         this.expirationDate = expirationDate;
         this.interestOnUsage = interestOnUsage;
         this.creditLimit = creditLimit;
@@ -32,7 +32,7 @@ public class CreditCard extends FinancialProduct implements InterestCalculable {
     }
 
     public void setCardNumber(String cardNumber) {
-        this.cardNumber.setValue(cardNumber);
+        this.cardNumber = new CardNumber(cardNumber);
     }
 
     @Override
