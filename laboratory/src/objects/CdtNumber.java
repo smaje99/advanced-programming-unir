@@ -1,6 +1,8 @@
+package objects;
+
 import java.util.regex.Pattern;
 
-public final class AccountNumber {
+public class CdtNumber {
     private static final String REGEX;
     private static final Pattern PATTERN;
 
@@ -11,16 +13,15 @@ public final class AccountNumber {
 
     private String value;
 
-    public AccountNumber(String value) {
+    public CdtNumber(String value) {
+        ensureIsValidCdtNumber(value);
         this.value = value;
-
-        ensureIsValidAccountNumber(value);
     }
 
-    public void ensureIsValidAccountNumber(
-        String accountNumber
+    public void ensureIsValidCdtNumber(
+        String cdtNumber
     ) throws FinancialProductNumberException {
-        if (!PATTERN.matcher(accountNumber).find()) {
+        if (!PATTERN.matcher(cdtNumber).find()) {
             throw new FinancialProductNumberException(REGEX);
         }
     }
@@ -30,7 +31,7 @@ public final class AccountNumber {
     }
 
     public void setValue(String value) {
-        ensureIsValidAccountNumber(value);
+        ensureIsValidCdtNumber(value);
         this.value = value;
     }
 

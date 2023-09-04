@@ -1,3 +1,5 @@
+package transations;
+
 import java.util.Date;
 
 public class FinancialTransaction {

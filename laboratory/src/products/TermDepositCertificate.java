@@ -1,3 +1,7 @@
+package products;
+
+import objects.CdtNumber;
+
 import java.util.Date;
 
 public final class TermDepositCertificate extends FinancialProduct implements MaturityCalculable {

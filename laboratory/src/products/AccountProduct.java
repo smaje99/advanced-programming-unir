@@ -1,3 +1,7 @@
+package products;
+
+import objects.AccountNumber;
+
 import java.util.Date;
 
 public abstract class AccountProduct extends FinancialProduct implements InterestCalculable {

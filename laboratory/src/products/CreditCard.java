@@ -1,3 +1,7 @@
+package products;
+
+import objects.CardNumber;
+
 import java.util.Date;
 
 public class CreditCard extends FinancialProduct implements InterestCalculable {

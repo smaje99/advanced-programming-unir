@@ -1,3 +1,5 @@
+package customers;
+
 public final class Customer {
     private String dni;
     private String name;

@@ -1,3 +1,5 @@
+package transations;
+
 public enum Transaction {
     DEPOSIT,
     WITHDRAWAL,

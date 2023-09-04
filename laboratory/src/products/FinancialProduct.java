@@ -1,3 +1,5 @@
+package products;
+
 import java.util.Date;
 
 public abstract class FinancialProduct {

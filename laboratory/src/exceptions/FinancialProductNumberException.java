@@ -1,3 +1,5 @@
+package exceptions;
+
 public class FinancialProductNumberException extends RuntimeException {
     private String pattern;
 
