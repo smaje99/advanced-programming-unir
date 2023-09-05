@@ -8,7 +8,12 @@ public class FinancialTransaction {
     private Transaction transactionType;
     private String description;
 
-    public FinancialTransaction(double amount, Date transactionDate, Transaction transactionType, String description) {
+    public FinancialTransaction(
+        double amount,
+        Date transactionDate,
+        Transaction transactionType,
+        String description
+    ) {
         this.amount = amount;
         this.transactionDate = transactionDate;
         this.transactionType = transactionType;
@@ -45,5 +50,13 @@ public class FinancialTransaction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Transacción: " + transactionType +
+                " monto: " + amount +
+                " descripción: " + description +
+                " fecha: " + transactionDate;
     }
 }

@@ -14,6 +14,11 @@ public final class SavingsAccount extends AccountProduct {
 
     @Override
     public double calculateMonthlyInterest() {
-        return getBalance() * (getInterestRate() / 100);
+        return getBalance() * (getInterestRate() / (getInterestRate() > 1 ? 100 : 1));
+    }
+
+    @Override
+    public String toString() {
+        return "Cuenta de Ahorros(número: " + getAccountNumber() + ", monto ahorrado: " + getBalance() + ")";
     }
 }

@@ -18,7 +18,7 @@ public final class CheckingAccount extends AccountProduct {
 
     @Override
     public double calculateMonthlyInterest() {
-        return getBalance() * (getInterestRate() / 100);
+        return getBalance() * (getInterestRate() / (getInterestRate() > 1 ? 100 : 1));
     }
 
     public double getOverdraftAllowed() {
@@ -27,5 +27,9 @@ public final class CheckingAccount extends AccountProduct {
 
     public void setOverdraftAllowed(double overdraftAllowed) {
         this.overdraftAllowed = overdraftAllowed;
+    }
+
+    public String toString() {
+        return "Cuenta Corriente(número: " + getAccountNumber() + ", monto: " + getBalance() + ")";
     }
 }
