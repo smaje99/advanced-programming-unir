@@ -1,0 +1,262 @@
+@startuml
+
+package customers {
+  class Customer {
+    -dni: String
+    -name: String
+    -email: String
+    -phoneNumber: String
+    -address: String
+    +Client(dni: String, name: String, email: String, phoneNumber: String, address: String)
+    +getDni(): String
+    +setDni(dni: String)
+    +getName(): String
+    +setName(name: String)
+    +getEmail(): String
+    +setEmail(email: String)
+    +getPhoneNumber(): String
+    +setPhoneNumber(phoneNumber: String)
+    +getAddress(): String
+    +setAddress(address: String)
+  }
+}
+
+package exceptions {
+  class FinancialProductNumberException << (E, #FF7700) >> {
+    -pattern: String
+    __
+    +FinancialProductNumberException(pattern: String)
+    __
+    +getPattern(): String
+    +getMessage(): String
+  }
+}
+
+package objects {
+  class AccountNumber {
+    -{static} PATTERN: Pattern
+    -value: String
+    __
+    +AccountNumber(value: String)
+    __
+    +ensureAccountNumberIsValid(value: String)
+    +getValue(): String
+  }
+
+  class CdtNumber {
+    -{static} PATTERN: Pattern
+    -value: String
+    __
+    +CdtNumber(value: String)
+    __
+    +ensureCdtNumberIsValid(value: String)
+    +getValue(): String
+  }
+
+  class CardNumber {
+    -{static} PATTERN: Pattern
+    -value: String
+    __
+    +AccountNumber(value: String)
+    __
+    +ensureAccountNumberIsValid(value: String)
+    +getValue(): String
+  }
+}
+
+package products {
+  abstract class FinancialProduct {
+    -openingDate: Date
+    __
+    +FinancialProduct(openingDate: Date)
+    __
+    +getOpeningDate(): Date
+    +setOpeningDate(openingDate: Date)
+  }
+
+  interface InterestCalculable {
+    {abstract} +calculateMonthlyInterest(): double
+  }
+
+  interface MaturityCalculable {
+    {abstract} +calculateValueAtMaturity(): double
+  }
+
+  interface Depositable {
+    {abstract} +deposit(amount: double)
+  }
+
+  interface Withdrawable {
+    {abstract} +withdraw(amount: double)
+  }
+
+  abstract class AccountProduct {
+    -accountNumber: AccountNumber
+    -interestRate: float
+    -balance: double
+    __
+    +AccountProduct(accountNumber: String, openingDate: Date, interestRate: float, balance: double)
+    __
+    +withdraw(amount: double)
+    +deposit(amount: double)
+    +getAccountNumber(): String
+    +setAccountNumber(accountNumber: String)
+    +getInterestRate(): float
+    +setInterestRate(interestRate: float)
+    +getBalance(): double
+    +setBalance(balance: double)
+  }
+
+  class SavingsAccount {
+      +SavingsAccount(accountNumber: String, openingDate: Date, interestRate: float, balance: double)
+      __
+      +calculateMonthlyInterest(): double
+  }
+
+  class CheckingAccount {
+    -overdraftAllowed: double
+    __
+    +CheckingAccount(accountNumber: String, openingDate: Date, balance: double, interestRate: float, overdraftAllowed: double)
+    __
+    +calculateMonthlyInterest(): double
+    +getOverdraftAllowed(): double
+    +setOverdraftAllowed(overdraft: double)
+  }
+
+  class TermDepositCertificate {
+    -cdtNumber: CdtNumber
+    -monthsTerm: int
+    -amount: double
+    -monthlyInterest: float
+    __
+    +TermDepositCertificate(accountNumber: String, openingDate: Date, monthsTerm: int, amount: double, monthlyInterest: float)
+    __
+    +calculateValueAtMaturity(): double
+    +deposit(amount: double)
+    +getCdtNumber(): String
+    +setCdtNumber(cdtNumber: String)
+    +getMonthsTerm(): int
+    +setMonthsTerm(monthsTerm: int)
+    +getAmount(): double
+    +setAmount(amount: double)
+    +getMonthlyInterest(): float
+    +setMonthlyInterest(monthlyInterest: float)
+  }
+
+  class CreditCard {
+    -cardNumber: CardNumber
+    -expirationDate: Date
+    -interestOnUsage: float
+    -creditLimit: double
+    -usedAmount:  double
+    __
+    +CreditCard(accountNumber: String, openingDate: Date, expirationDate: Date, interestOnUsage: float, creditLimit: double, usedAmount: double)
+    __
+    +calculateMonthlyInterest(): double
+    +deposit(amount: double)
+    +getCardNumber(): String
+    +setCardNumber(cardNumber: String)
+    +getExpirationDate(): Date
+    +setExpirationDate(expirationDate: Date)
+    +getInterestOnUsage(): float
+    +setInterestOnUsage(interestOnUsage: float)
+    +getCreditLimit(): double
+    +setCreditLimit(creditLimit: double)
+    +getUsedAmount(): double
+    +setUsedAmount(usedAmount: double)
+  }
+}
+
+package transactions {
+  enum Transaction {
+    DEPOSIT
+    WITHDRAWAL
+    TRANSFER
+    INTEREST
+  }
+
+  class FinancialTransaction {
+    -amount: double
+    -transactionDate: Date
+    -transactionType: Transaction
+    -description: String
+    __
+    +FinancialTransaction(amount: double, transactionDate: Date, transactionType: Transaction, description: String)
+    __
+    +getAmount(): double
+    +setAmount(amount: double)
+    +getTransactionDate(): Date
+    +setTransactionDate(transactionDate: Date)
+    +getTransactionType(): Transaction
+    +setTransactionType(transactionType: Transaction)
+    +getDescription(): String
+    +setDescription(description: String)
+  }
+}
+
+class SystemBanking {
+  -{static}CUSTOMERS: ArrayList<Customer>
+  -{static}FINANCIAL_PRODUCTS_BY_CUSTOMERS: HashMap<Customer, ArrayList<FinancialProduct>>
+  -{static}FINANCIAL_TRANSACTIONS_BY_PRODUCTS: HashMap<FinancialProduct, ArrayList<FinancialTransaction>>
+  +registerCustomer(customer: Customer)
+  +registerFinancialProduct(customer: Customer, financialProduct: FinancialProduct)
+  +registerFinancialTransaction(financialProduct: FinancialProduct, financialTransaction: FinancialTransaction)
+  +getCustomers(): ArrayList<Customer>
+  +getFinancialProducts(customer: Customer): ArrayList<FinancialProduct>
+  +getFinancialTransactions(financialProduct: FinancialProduct): ArrayList<FinancialTransaction>
+  +makeDeposit(depositable: Depositable, amount: double)
+  +makeWithdrawal(withdrawable: Withdrawable, amount: double)
+  +makeWithdrawal(withdrawable: Withdrawable, depositable: Depositable, amount: double)
+  +getMonthlyInterest(financialProduct: InterestCalculable): double
+  +getMaturatyInterest(financialProduct: MaturityCalculable): double
+  +sendExtractToEmail(productNumber: String, customer: Customer): String
+  +sendExtractToAddress(productNumber: String, customer: Customer): String
+}
+
+class Main {
+    {static} main(args: String[])
+}
+
+Customer "1" -- "*" FinancialProduct
+FinancialProduct "1" -- "*" FinancialTransaction
+
+FinancialProduct <|-- AccountProduct
+InterestCalculable <|.. AccountProduct
+Depositable <|.up. AccountProduct
+Withdrawable <|.up. AccountProduct
+AccountNumber --* AccountProduct
+
+AccountProduct <|-left- SavingsAccount
+
+AccountProduct <|-- CheckingAccount
+
+FinancialProduct <|-- TermDepositCertificate
+MaturityCalculable <|.up. TermDepositCertificate
+Depositable <|.. TermDepositCertificate
+CdtNumber -down-* TermDepositCertificate
+
+FinancialProduct <|-- CreditCard
+InterestCalculable <|.. CreditCard
+Depositable <|.. CreditCard
+CardNumber -down-* CreditCard
+
+FinancialProductNumberException <.. AccountNumber : <<use>>
+FinancialProductNumberException <.. CardNumber : <<use>>
+FinancialProductNumberException <.. CdtNumber : <<use>>
+
+Transaction --right--* FinancialTransaction
+
+Customer -down-* SystemBanking
+FinancialProduct -down-* SystemBanking
+FinancialTransaction -down-* SystemBanking
+Depositable -left-o SystemBanking
+Withdrawable -down-o SystemBanking
+InterestCalculable -down-o SystemBanking
+MaturityCalculable -down-o SystemBanking
+
+SystemBanking <.. Main : <<use>>
+FinancialProduct <.. Main : <<use>>
+FinancialTransaction <.. Main : <<use>>
+Transaction <.. Main : <<use>>
+
+@enduml
