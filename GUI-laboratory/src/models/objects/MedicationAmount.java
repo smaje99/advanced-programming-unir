@@ -10,13 +10,13 @@ public class MedicationAmount {
         ensureAmountIsGreaterThanZero(value);
     }
 
-    public void ensureAmountIsDefined(Integer value) throws IllegalArgumentException {
+    public static void ensureAmountIsDefined(Integer value) throws IllegalArgumentException {
         if (value == null) {
             throw new IllegalArgumentException("La cantidad debe ser definida");
         }
     }
 
-    public void ensureAmountIsGreaterThanZero(int value) throws IllegalArgumentException {
+    public static void ensureAmountIsGreaterThanZero(int value) throws IllegalArgumentException {
         if (value <= 0) {
             throw new IllegalArgumentException("La cantidad debe ser mayor a cero");
         }

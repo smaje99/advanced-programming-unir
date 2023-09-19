@@ -3,26 +3,21 @@ package models.objects;
 import models.enums.Branch;
 
 public class MedicationBranch {
-    private Branch value;
+    private Branch[] values;
 
-    public MedicationBranch(Branch value) {
-        this.value = value;
+    public MedicationBranch(Branch[] values) {
+        this.values = values;
 
-        ensureBranchIsDefined(value);
+        ensureBranchIsDefined(values);
     }
 
-    public void ensureBranchIsDefined(Branch value) {
-        if (value == null) {
-            throw new IllegalArgumentException("Sucursal must be defined");
+    public static void ensureBranchIsDefined(Branch[] values) {
+        if (values == null || values.length == 0) {
+            throw new IllegalArgumentException("Sucursal debe ser definida");
         }
     }
 
-    public Branch getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value.getAddress();
+    public Branch[] getValues() {
+        return values;
     }
 }

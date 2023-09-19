@@ -11,14 +11,14 @@ public class Medication {
     private MedicationAmount amount;
     private MedicationDistributor distributor;
 
-    private MedicationBranch branch;
+    private MedicationBranch branches;
 
-    public Medication(String name, Type type, int amount, Distributor distributor, Branch branch) {
+    public Medication(String name, Type type, int amount, Distributor distributor, Branch[] branches) {
         this.name = new MedicationName(name);
         this.type = new MedicationType(type);
         this.amount = new MedicationAmount(amount);
         this.distributor = new MedicationDistributor(distributor);
-        this.branch = new MedicationBranch(branch);
+        this.branches = new MedicationBranch(branches);
     }
 
     public String getName() {
@@ -45,20 +45,20 @@ public class Medication {
         this.amount = new MedicationAmount(amount);
     }
 
-    public Distributor getDistributor() {
+    public Distributor getDistributors() {
         return distributor.getValue();
 
     }
 
-    public void setDistributor(Distributor distributor) {
+    public void setDistributors(Distributor distributor) {
         this.distributor = new MedicationDistributor(distributor);
     }
 
-    public Branch getBranch() {
-        return branch.getValue();
+    public Branch[] getBranches() {
+        return branches.getValues();
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = new MedicationBranch(branch);
+    public void setBranch(Branch[] branches) {
+        this.branches = new MedicationBranch(branches);
     }
 }

@@ -11,7 +11,7 @@ public class MedicationType {
         ensureMedicationTypeIsDefined(value);
     }
 
-    public void ensureMedicationTypeIsDefined(Type value) {
+    public static void ensureMedicationTypeIsDefined(Type value) {
 		if (value == null) {
             throw new IllegalArgumentException("Tipo de medicación debe ser definido");
         }

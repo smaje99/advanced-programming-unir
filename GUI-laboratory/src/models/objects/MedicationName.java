@@ -18,13 +18,13 @@ public class MedicationName {
         ensureNameIsAlphaNumeric(value);
     }
 
-    public void ensureNameIsDefined(String value) throws IllegalArgumentException {
+    public static void ensureNameIsDefined(String value) throws IllegalArgumentException {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("Nombre del medicamento debe ser definido");
         }
     }
 
-    public void ensureNameIsAlphaNumeric(String value) throws IllegalArgumentException {
+    public static void ensureNameIsAlphaNumeric(String value) throws IllegalArgumentException {
         if (!PATTERN.matcher(value).find()) {
             throw new IllegalArgumentException("Nombre del medicamento debe contener valores alfanuméricos");
         }

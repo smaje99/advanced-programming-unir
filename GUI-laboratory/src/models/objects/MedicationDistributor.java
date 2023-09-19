@@ -11,7 +11,7 @@ public class MedicationDistributor {
         ensureDistributorIsDefined(value);
     }
 
-    public void ensureDistributorIsDefined(Distributor value) throws IllegalArgumentException {
+    public static void ensureDistributorIsDefined(Distributor value) throws IllegalArgumentException {
         if (value == null) {
             throw new IllegalArgumentException("El distribuidor farmacéutico debe ser definido");
         }
