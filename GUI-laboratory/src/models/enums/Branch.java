@@ -1,13 +1,19 @@
 package models.enums;
 
 public enum Branch {
-    PRIMARY("Calle de la Rosa n. 28"),
-    SECONDARY("Calle de la Rosa n. 28");
+    PRIMARY("Primaria", "Calle de la Rosa n. 28"),
+    SECONDARY("Secundaria", "Calle de la Rosa n. 28");
 
+    private final String branch;
     private final String address;
 
-    Branch(String address) {
+    Branch(String branch, String address) {
+        this.branch = branch;
         this.address = address;
+    }
+
+    public String getBranch() {
+        return branch;
     }
 
     public String getAddress() {
