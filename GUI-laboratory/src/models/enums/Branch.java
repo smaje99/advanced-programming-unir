@@ -2,7 +2,7 @@ package models.enums;
 
 public enum Branch {
     PRIMARY("Primaria", "Calle de la Rosa n. 28"),
-    SECONDARY("Secundaria", "Calle de la Rosa n. 28");
+    SECONDARY("Secundaria", "Calle Alcazabilla n. 3");
 
     private final String branch;
     private final String address;

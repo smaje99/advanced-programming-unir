@@ -113,4 +113,12 @@ public final class PharmacyController {
 
         return !error;
     }
+
+    public void sendOrder() {
+        System.out.println("Pedido enviado");
+    }
+
+    public Medication getMedication() {
+        return medication;
+    }
 }

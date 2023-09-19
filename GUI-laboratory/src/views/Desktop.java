@@ -1,19 +1,30 @@
 package views;
 
-import javax.swing.JFrame;
-import java.awt.Container;
+import controllers.PharmacyController;
 
-public final class Desktop extends JFrame {
-    private Desktop(String title, Container contentPane) {
-        super(title);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(contentPane);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
+import javax.swing.JFrame;
+
+public final class Desktop {
 
     public static JFrame getMedicationForm() {
-        return new Desktop("Nuevo pedido - Farmacia", new MedicationForm());
+        JFrame frame = new JFrame("Nuevo pedido - Farmacia");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(new MedicationForm());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        return frame;
+    }
+
+    public static JFrame getTicket(String name, PharmacyController controller) {
+        JFrame frame = new JFrame(name);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setContentPane(new Ticket(controller, frame));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        return frame;
     }
 }

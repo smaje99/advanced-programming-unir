@@ -296,6 +296,10 @@ public class MedicationForm extends JPanel implements ActionListener {
         if (isCreated) {
             repaint();
 
+            var distributor = pharmacyController.getMedication().getDistributor().getDistributor();
+            var ticketTitle = "Pedido al distribuidor " + distributor;
+            Desktop.getTicket(ticketTitle, pharmacyController);
+
             cleanInputComponents();
         }
     }

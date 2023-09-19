@@ -17,4 +17,9 @@ public enum Type {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return type;
+    }
 }

@@ -45,12 +45,12 @@ public class Medication {
         this.amount = new MedicationAmount(amount);
     }
 
-    public Distributor getDistributors() {
+    public Distributor getDistributor() {
         return distributor.getValue();
 
     }
 
-    public void setDistributors(Distributor distributor) {
+    public void setDistributor(Distributor distributor) {
         this.distributor = new MedicationDistributor(distributor);
     }
 
